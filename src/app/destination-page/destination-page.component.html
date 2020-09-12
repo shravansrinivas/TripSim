@@ -20,7 +20,7 @@
             <div class="jumbotron jumbotron-intro jumbotron-fluid">
                 <div class="container text-desc">
                     <h1 class="display-4 title-text "> Hotels Offers</h1>
-
+<div *ngIf="hotels.length!==0">
                     <mat-grid-list cols="1" rowHeight="3:1" *ngFor="let hotel of hotels">
                             <mat-grid-tile>
                                 <div class="row hotels-info">
@@ -52,8 +52,16 @@
 
                             </mat-grid-tile>
                         
-                    </mat-grid-list>
-
+                    </mat-grid-list></div>
+                    <div *ngIf="hotels.length==0">
+                    <mat-grid-list cols="1" rowHeight="4:1">
+                        <mat-grid-tile class="flight-tile">
+                        <h1>
+                            Oops!! Could not fetch hotel offers at {{cityname}} at the moment!!<br>
+                            Please check again later
+                        </h1>    
+                        </mat-grid-tile>
+                    </mat-grid-list></div>
                     <mat-paginator [length]="hotelPagelength" [pageSize]="hotelPageSize"
                         [pageSizeOptions]="hotelPageSizeOptions" (page)="hotelPageEvent = $event">
                     </mat-paginator>
