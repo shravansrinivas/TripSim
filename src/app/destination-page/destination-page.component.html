@@ -1,0 +1,117 @@
+<div class="spinner" *ngIf="loading">
+    <div class="sk-folding-cube">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+    </div>
+</div>
+
+<div *ngIf="!loading" class="container-flex">
+    <app-header></app-header>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="city-title"> <img src="https://img.icons8.com/color/65/000000/sunbathe.png"/>Get ready to Enroute {{cityname}}!!!<img src="https://img.icons8.com/color/65/000000/flip-flops.png"/> </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="jumbotron jumbotron-intro jumbotron-fluid">
+                <div class="container text-desc">
+                    <h1 class="display-4 title-text "> Hotels Offers</h1>
+
+                    <mat-grid-list cols="1" rowHeight="3:1" *ngFor="let hotel of hotels">
+                            <mat-grid-tile>
+                                <div class="row hotels-info">
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        <img src="https://img.icons8.com/metro/26/000000/5-star-hotel.png" />
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                        {{hotel.hotel.name}}
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                        {{hotel.hotel.rating}} <img
+                                            src="https://img.icons8.com/emoji/8/000000/star-emoji.png" />
+                                    </div>
+                                
+                                              <br/>  <br/>       
+                                              <!-- <div style="margin-top:10%">             -->
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <img src="https://img.icons8.com/fluent-systems-filled/24/000000/phone.png"/> {{hotel.hotel.contact.phone}}
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="color:chocolate">
+                                        {{hotel.hotel.hotelDistance.distance}}  {{hotel.hotel.hotelDistance.distanceUnit}} from City centre
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        {{hotel.offers.length}} Offers
+                                    </div>
+                                    <br>
+                                </div>
+
+                            </mat-grid-tile>
+                        
+                    </mat-grid-list>
+
+                    <mat-paginator [length]="hotelPagelength" [pageSize]="hotelPageSize"
+                        [pageSizeOptions]="hotelPageSizeOptions" (page)="hotelPageEvent = $event">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="jumbotron jumbotron-intro jumbotron-fluid">
+                <div class="container text-desc">
+                    <h1 class="display-4 title-text">Flights Offers</h1>
+                    <div *ngIf="flights.length>0">
+                    <mat-grid-list cols="1" rowHeight="4:1" *ngFor="let flight of flights">
+                        <!-- <a routerLink="/flights/{{flight}}"> -->
+                            <mat-grid-tile class="flight-tile">
+                                <div class="container container-fluid">
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div class="row" style="margin-left:5%;">
+                                            <img src="https://img.icons8.com/color/96/000000/airplane-front-view.png"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div>
+                                            {{flight.numberOfBookableSeats}} Seats Available    
+                                        </div>
+                                        <div>
+                                            <h3>&euro; {{flight.price.total}} </h3>    
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <h2>#</h2>
+                                        <br>{{flight.itineraries[0].duration}}
+                                    </div>
+                                </div>
+                                </div>
+
+                            </mat-grid-tile>
+                        <!-- </a> -->
+                    </mat-grid-list></div>
+                    <div *ngIf='flights.length==0'>
+<mat-grid-list cols="1" rowHeight="4:1">
+    <mat-grid-tile class="flight-tile">
+    <h1>
+        Oops!! Could not fetch flights to {{cityname}} at the moment!!<br>
+        Please check again later
+    </h1>    
+    </mat-grid-tile>
+</mat-grid-list>
+                   
+                    </div>
+                    <mat-paginator [length]="flightPagelength" [pageSize]="flightPageSize"
+                        [pageSizeOptions]="flightPageSizeOptions" (page)="flightPageEvent = $event">
+                    </mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+
+</div>

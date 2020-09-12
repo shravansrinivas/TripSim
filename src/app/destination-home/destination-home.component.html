@@ -1,0 +1,101 @@
+<div class="spinner" *ngIf="loading">
+    <div class="sk-folding-cube">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+    </div>
+</div>
+
+
+<div *ngIf="!loading" class="container container-fluid">
+    <app-header></app-header>
+    <div class="row">
+        <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12 search-bar" style=" margin: 5% 0%;align-items: center;">
+            <form class="example-form">
+                <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="Enter Destination" aria-label="Number" matInput
+                        [(ngModel)]='cityToSearch' [formControl]="myControl" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <button class="btn btn-success" (click)="gotoDest()">Let's Go<img
+                        src="https://img.icons8.com/color/40/000000/track-and-field.png" /></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12" style=" width: 100%;align-items: center;">
+        <div class="jumbotron jumbotron-fluid ">
+            <div class="container">
+                <h1 class="display-12" style="text-align: center; font-size: 35px; background-color: darkblue;">Top
+                    Visited Destinations</h1>
+                <div class="row">
+                    <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4">
+                        <div class="card" style=" background-color: coral;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{topDests[0].destination}}</h5>
+                                <a routerLink="/destinations/london" class="btn btn-primary">View All Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4">
+
+                        <div class="card" style=" background-color: coral;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{topDests[1].destination}}</h5>
+                                <a routerLink="/destinations/miami" class="btn btn-primary">View All Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4">
+
+                        <div class="card" style=" background-color: coral;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{topDests[2].destination}}</h5>
+                                <a routerLink="/destinations/madrid" class="btn btn-primary">View All Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4">
+
+                        <div class="card" style=" background-color: coral;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{topDests[3].destination}}</h5>
+                                <a routerLink="/destinations/atlanta" class="btn btn-primary">View All Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4">
+                        <div class="card" style=" background-color: coral;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{topDests[4].destination}}</h5>
+                                <a routerLink="/destinations/schiphol" class="btn btn-primary">View All Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4">
+
+                        <div class="card" style=" background-color: coral;">
+                            <div class="card-body">
+                                <h5 class="card-title">OPU</h5>
+                                <a routerLink="/destinations/Balimo" class="btn btn-primary">View All Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <app-footer></app-footer>
+
+</div>

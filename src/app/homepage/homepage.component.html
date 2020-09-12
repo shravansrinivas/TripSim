@@ -1,36 +1,117 @@
-<div class="container-flex">
+<div class="spinner" *ngIf="loading">
+    <div class="sk-folding-cube">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+      </div>
+</div>
+
+<div *ngIf="!loading" class="container-flex">
+    <app-header></app-header>
+
     <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-12  col-md-6 col-lg-6 div-left">
             <div class="jumbotron jumbotron-intro jumbotron-fluid">
                 <div class="container text-desc">
-                    <h1 class="display-4 title-text"><span class="greeting">{{greeting}}</span> Traveller!!</h1>
+                    <h1 class="display-4 title-text"><span class="greeting">{{greeting}} <img src="https://img.icons8.com/emoji/30/000000/vulcan-salute-emoji.png"/></span> Traveller!!</h1>
                     <p class="lead desc-text">Glad you are here, enjoy the site and Bon Voyage!!!! </p>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-6">
-            <div class="jumbotron jumbotron-fluid jumbotron-options">
-                <p class="lead ques-text">What do you want to look into?</p>
-                <div class="row icon-row">
-                    <div class="col-md-4 col-sm-12 col-lg-4 icon">
-                        <img class="icon" src="https://image.flaticon.com/icons/svg/2984/2984097.svg" alt="hotel icon">
-                        <br>
-                        <h3 class="icon-label">  Hotels</h3>
-                    </div>
-                    <div class="col-md-4 col-sm-12 col-lg-4 icon">
-
-                        <img class="icon" src="https://image.flaticon.com/icons/svg/744/744502.svg" alt="hotel icon">
-                        <br>
-                        <h3 class="icon-label">Flights</h3>
-                    </div>
-                    <div class="col-md-4 col-sm-12 col-lg-4 icon">
-
-                        <img class="icon" src="https://image.flaticon.com/icons/svg/3069/3069469.svg" alt="hotel icon">
-                        <br>
-                        <h3 class="icon-label">Destinations</h3>
+            <div class="jumbotron jumbotron-fluid jumbotron-stats">
+                <div class="container text-desc">
+                    <h1 class="display-4 title-text">Our Special Insights, Just for you!</h1>
+                    <div class="row icon-row">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 icon">
+                            
+                            <div class="card card-success" style="width: 100%; background-color: red;">
+                                <div class="card-body">
+                                  <h5 class="card-title">Most Traveled Destination Flights!</h5>
+                                  <a routerLink="/insights" class="btn btn-sm btn-primary">Look Now!</a>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 icon">
+    
+                            
+                            <div class="card card-success" style="width: 100%; background-color: rgb(245, 241, 27);">
+                                <div class="card-body">
+                                  <h5 class="card-title">Travel Recommendations!</h5>
+                                  <a routerLink="/insights" class="btn btn-sm btn-primary">Look Now!</a>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 icon">
+    
+                            <div class="card card-success" style="width: 100%; background-color: green;">
+                                <div class="card-body">
+                                  <h5 class="card-title">Flight Most Booked Destinations!</h5>
+                                  <a routerLink="/insights" class="btn btn-sm btn-primary">Look Now!</a>
+                                </div>
+                              </div>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12  col-md-6 col-lg-6 div-right">
+            <div class="jumbotron jumbotron-fluid jumbotron-options">
+                <p class="lead ques-text title-text">What do you want to look into?</p>
+                <div class="row icon-row">
+                    <div class="col-xs-12 col-sm-12 col-md-4   col-lg-4 icon">
+                       <a routerLink="/hotels"> <img class="icon" src="https://image.flaticon.com/icons/svg/2984/2984097.svg" alt="hotel icon">
+                        <br>
+                        <h3 class="icon-label">  Hotels</h3></a>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4   col-lg-4 icon">
+                        <a routerLink="/flights">
+                        <img class="icon" src="https://image.flaticon.com/icons/svg/744/744502.svg" alt="hotel icon">
+                        <br>
+                        <h3 class="icon-label">Flights</h3></a>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4   col-lg-4 icon">
+                        <a routerLink="/destinations">
+                        <img class="icon" src="https://image.flaticon.com/icons/svg/3069/3069469.svg" alt="hotel icon">
+                        <br>
+                        <h3 class="icon-label">Destinations</h3></a>
+                    </div>
+                </div>
+            </div>
+            <div class="jumbotron jumbotron-fluid jumbotron-city-search">
+                <p class="lead search-ques-text title-text-spl">Sure of where to leave already?</p>
+                <form class="example-form">
+                    <mat-form-field class="example-full-width">
+                        <input type="text"
+                               placeholder="Enter Destination"
+                               aria-label="Number"
+                               matInput
+                               [(ngModel)]='cityToSearch'
+                               [formControl]="myControl"
+                               [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    <button class="btn btn-danger" (click)="citySearch()">Go there Already!</button>
+                  </form>
+            </div>
+            
+        </div>
+       <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="jumbotron jumbotron-fluid jumbotron-subscribe">
+            <p class="lead search-ques-text title-text">Keep yourself updated?</p>
+            <div class="form-group" style="text-align: center;">
+                <form>
+                <input  placeholder="Enter your email ID" class="form-control" type="email" required>
+                
+                <button type="submit" class="btn btn-success" style="margin-top: 1%;" (click)="submitEmail()">Keep me Posted</button>
+            </form></div>
+        </div>
     </div>
+    </div>
+    <app-footer></app-footer>
+
 </div>
