@@ -1,4 +1,5 @@
 # TripSim
+This is an application that lists flight and hotel offers listing for a traveler about a particular destination city or airport. Built using Angular 9 and Amadeus APIs for Developers :)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.4.
 
